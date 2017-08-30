@@ -2,8 +2,12 @@ package ArrayAndMatrix;
 
 import java.util.Arrays;
 
+import static ArrayAndMatrix.CommonContract.swap;
+
 public class FindMinK {
     public static int[] sortToCompare(int[] arr, int k) {
+        if (k > arr.length || k < 1)
+            return new int[]{};
         if (k >= arr.length)
             return Arrays.copyOf(arr, arr.length);
         int[] ret = new int[k];
@@ -15,6 +19,8 @@ public class FindMinK {
     }
 
     public static int[] getMinK(int[] arr, int k) {
+        if (k > arr.length || k < 1)
+            return new int[]{};
         if (k >= arr.length)
             return Arrays.copyOf(arr, arr.length);
         tickOutMinK(arr, 0, arr.length, k);
@@ -22,44 +28,45 @@ public class FindMinK {
         for (int i = 0; i < k; i++) {
             ret[i] = arr[i];
         }
-        Arrays.sort(ret,0,ret.length);
+        Arrays.sort(ret, 0, ret.length);
         return ret;
     }
 
     //end is exclusive
     private static void tickOutMinK(int[] arr, int start, int end, int k) {
-        if (k >= end - start)
+        if (k >= end - start + 1)
             return;
         int mid = getMidNum(arr, start, end);
-        int midIndex = start;
-        for (int i = start; i < end; i++) {
-            if (arr[i] == mid) {
-                midIndex = i;
-                break;
-            }
-        }
-        int seq = partionArray(arr, start, end, midIndex);
-        if (seq == k - 1)
+        int right = partitionArray(arr, start, end, mid);
+        int left = right;
+        while (left > start && arr[left] == arr[left - 1])
+            left--;
+        if (right - start >= k - 1 && left - start <= k - 1)
             return;
-        else if (seq < k - 1) {
-            tickOutMinK(arr, seq + 1, end, k - 1 - seq);
+        else if (right - start < k - 1) {
+            tickOutMinK(arr, right + 1, end, k - 1 - right + start);
         } else {
-            tickOutMinK(arr, start, seq, k);
+            tickOutMinK(arr, start, left, k);
         }
     }
 
     //end is exclusive
-    private static int partionArray(int[] arr, int start, int end, int midIndex) {
-        int pivot = arr[midIndex];
-        swap(arr, midIndex, end - 1);
-        int f = -1;
-        for (int i = start; i < end; i++) {
-            if (arr[i] <= pivot) {
-                f++;
-                swap(arr, f, i);
+    private static int partitionArray(int[] arr, int start, int end, int mid) {
+        int i = start - 1, j = start, w = end;
+        while (j < w) {
+            if (arr[j] < mid) {
+                i++;
+                swap(arr, i, j);
+            } else if (arr[j] == mid) {
+                w--;
+                swap(arr, j, w);
             }
+            j++;
         }
-        return f;
+        while (w < end) {
+            swap(arr, ++i, w++);
+        }
+        return i;
     }
 
     //end is exclusive
@@ -85,11 +92,5 @@ public class FindMinK {
             midArr[g - 1] = arr[r + (end - r) / 2];
         else midArr[g - 1] = arr[end - 3];
         return getMidNum(midArr, 0, g);
-    }
-
-    private static void swap(int[] arr, int i, int j) {
-        int tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
     }
 }
