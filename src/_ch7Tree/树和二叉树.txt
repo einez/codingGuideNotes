@@ -59,3 +59,27 @@
 	c) 二叉树遍历非递归算法；[见：_ch7Tree.NonRecursiveThrough]
 	d) 层次遍历算法；[见：_ch7Tree.NonRecursiveThrough]
 	*e) Morris遍历算法。
+6. 二叉树的构造
+	定理：
+		任何n(n>=0)个不同节点的二叉树，都可由它的中序序列和先序序列唯一确定；[代码见：_ch7Tree.Contract]
+		任何n(n>=0)个不同节点的二叉树，都可由它的中序序列和后序序列唯一确定；[代码见：_ch7Tree.Contract]
+7. 线索二叉树
+	a) 数据结构：
+		class ThreadBTNode{int ltag; ThreadBTNode lChild; int rtag; ThreadBTNode rChild}
+		tag=0表示指向孩子节点，tag=1表示指向前驱或后继节点。
+	b) 中序线索化二叉树的创建和打印。[代码见：_ch7Tree.ThreadThrough]
+8. 哈夫曼树
+	a) 树中所有叶子结点的带权路径长度之和称为该树的带权路径长度，通常记为：WPL=E(i=1toN)Wi*Li。WPL最小的称为哈夫曼树。
+	b) 构造算法
+		i) 对给定的n个节点，创建对应的单一顶点的树，构成森林集合；
+		ii) 选取权值最小的两个节点A,B从森林中删除，创建一个父节点C以A,B作为子树并以A,B的权值之和作为C节点的值，并将C加入森林集合；
+		重复i)ii)直到只有一个节点。
+	c) 数据结构：
+		class HTNode{int data; double weight; int parent; int lchild; int rchild;}
+	d) 构造哈夫曼树：void createHTree(HTNode[] ht,int n);
+	e) 根据哈夫曼树求哈夫曼编码：void createHCode(HTNode[] ht, HCode[] hcd, int n);
+		class HCode{char[] cd; int start;}
+9. 并查集
+	a) 数据结构：
+		class UFSTree{int data; int rank; int parent;}//parent为双亲的下标
+	b) 初始化、查找、合并操作。[代码见：_ch7Tree.UFSTree]

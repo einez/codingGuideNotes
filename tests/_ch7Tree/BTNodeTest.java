@@ -7,6 +7,28 @@ import static org.junit.Assert.assertEquals;
 
 public class BTNodeTest {
     @Test
+    public void createBTNodeWithPreIn() throws Exception {
+        String str = "1(24(,6(4,15(5,10))),3(4,35))";//注意各个值互不相等
+        BTNode root = BTNode.createBTNode(str);
+        String preString = RecursiveThrough.preOrder(root);
+        String inString = RecursiveThrough.inOrder(root);
+        BTNode copy = Contract.BTNode.createBTNodeWithPreIn(preString, inString);
+        String actual = copy.toString();
+        assertEquals(str, actual);
+    }
+
+    @Test
+    public void createBTNodeWithPostIn() throws Exception {
+        String str = "1(24(,6(4,15(5,10))),3(4,35))";//注意各个值互不相等
+        BTNode root = BTNode.createBTNode(str);
+        String postString = RecursiveThrough.postOrder(root);
+        String inString = RecursiveThrough.inOrder(root);
+        BTNode copy = Contract.BTNode.createBTNodeWithPostIn(postString, inString);
+        String actual = copy.toString();
+        assertEquals(str, actual);
+    }
+
+    @Test
     public void createBTNodeTest() throws Exception {
         String str = "1(24(,6(4,5(5,10))),3(4,5))";
         BTNode root = BTNode.createBTNode(str);
