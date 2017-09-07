@@ -1,6 +1,6 @@
 package _ch7Tree;
 
-import _ch7Tree.Contract.BTNode;
+import _ch7Tree.Tree.BTNode;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -12,7 +12,7 @@ public class BTNodeTest {
         BTNode root = BTNode.createBTNode(str);
         String preString = RecursiveThrough.preOrder(root);
         String inString = RecursiveThrough.inOrder(root);
-        BTNode copy = Contract.BTNode.createBTNodeWithPreIn(preString, inString);
+        BTNode copy = Tree.BTNode.createBTNodeWithPreIn(preString, inString);
         String actual = copy.toString();
         assertEquals(str, actual);
     }
@@ -23,7 +23,7 @@ public class BTNodeTest {
         BTNode root = BTNode.createBTNode(str);
         String postString = RecursiveThrough.postOrder(root);
         String inString = RecursiveThrough.inOrder(root);
-        BTNode copy = Contract.BTNode.createBTNodeWithPostIn(postString, inString);
+        BTNode copy = Tree.BTNode.createBTNodeWithPostIn(postString, inString);
         String actual = copy.toString();
         assertEquals(str, actual);
     }
