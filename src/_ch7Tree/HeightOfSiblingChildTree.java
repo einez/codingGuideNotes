@@ -1,6 +1,6 @@
 package _ch7Tree;
 
-import _ch7Tree.Contract.SCTNode;
+import _ch7Tree.Tree.SCTNode;
 
 public class HeightOfSiblingChildTree {
     public static int getTreeHeight(SCTNode root) {

@@ -1,6 +1,6 @@
 package _ch7Tree;
 
-import _ch7Tree.Contract.BTNode;
+import _ch7Tree.Tree.BTNode;
 
 public class Morris {
     public static String inOrder(BTNode root) {

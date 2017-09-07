@@ -1,7 +1,7 @@
 package _ch7Tree;
 
 
-public class Contract {
+public class Tree {
     static class SCTNode {
         int data;
         SCTNode sibling;

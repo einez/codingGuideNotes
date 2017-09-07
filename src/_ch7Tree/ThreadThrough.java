@@ -1,7 +1,7 @@
 package _ch7Tree;
 
-import _ch7Tree.Contract.BTNode;
-import _ch7Tree.Contract.ThreadBTNode;
+import _ch7Tree.Tree.BTNode;
+import _ch7Tree.Tree.ThreadBTNode;
 
 public class ThreadThrough {
     public static ThreadBTNode createByBTNode(BTNode root) {
