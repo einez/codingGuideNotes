@@ -11,13 +11,13 @@ public class Graph {
         int e;
         int[][] edges;
 
-        public MGraph(int n) {
+        MGraph(int n) {
             this.n = n;
             this.e = 0;
             this.edges = new int[n][n];
         }
 
-        public MGraph(int n, int[][] edges) {
+        MGraph(int n, int[][] edges) {
             this.n = n;
             this.edges = Arrays.copyOf(edges, edges.length);
             this.e = 0;
@@ -30,13 +30,13 @@ public class Graph {
             this.e /= 2;
         }
 
-        public MGraph(MGraph mg) {
+        MGraph(MGraph mg) {
             this.n = mg.n;
             this.e = mg.e;
             this.edges = Arrays.copyOf(mg.edges, mg.edges.length);
         }
 
-        public MGraph(ALGraph alg) {
+        MGraph(ALGraph alg) {
             this.n = alg.n;
             this.e = alg.e;
             this.edges = new int[n][n];
@@ -84,7 +84,7 @@ public class Graph {
         int e;
         GNode[] vertex;
 
-        public ALGraph(int n) {
+        ALGraph(int n) {
             this(n, 0);
         }
 
@@ -137,38 +137,43 @@ public class Graph {
         }
     }
 
-    public static MGraph createUndirectedMGraph() {
+    static MGraph createUndirectedMGraph(boolean weighted) {
         Random random = new Random();
         int n = random.nextInt(10) + 1;
         MGraph mg = new MGraph(n);
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
                 if (random.nextInt(2) == 1) {
-                    mg.edges[i][j] = 1;
+                    mg.edges[i][j] = weighted ? random.nextInt(10) + 1 : 1;
                     mg.edges[j][i] = mg.edges[i][j];
                     mg.e++;
+                } else {
+                    mg.edges[i][j] = weighted ? Integer.MAX_VALUE : 0;
+                    mg.edges[j][i] = mg.edges[i][j];
                 }
             }
         }
         return mg;
     }
 
-    public static MGraph createDirectedMGraph() {
+    static MGraph createDirectedMGraph(boolean weighted) {
         Random random = new Random();
         int n = random.nextInt(10) + 1;
         MGraph mg = new MGraph(n);
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (j != i && random.nextInt(2) == 1) {
-                    mg.edges[i][j] = 1;
+                    mg.edges[i][j] = weighted ? random.nextInt(10) + 1 : 1;
                     mg.e++;
+                } else {
+                    mg.edges[i][j] = weighted ? Integer.MAX_VALUE : 0;
                 }
             }
         }
         return mg;
     }
 
-    public static ALGraph createUndirectedALGraph() {
+    static ALGraph createUndirectedALGraph() {
         Random random = new Random();
         int n = random.nextInt(10) + 1;
         ALGraph alg = new ALGraph(n);
@@ -184,7 +189,7 @@ public class Graph {
         return alg;
     }
 
-    public static ALGraph createDirectedALGraph() {
+    static ALGraph createDirectedALGraph() {
         Random random = new Random();
         int n = random.nextInt(10) + 1;
         ALGraph alg = new ALGraph(n);

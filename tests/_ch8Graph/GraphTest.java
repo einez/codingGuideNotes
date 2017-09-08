@@ -7,13 +7,13 @@ import org.junit.Test;
 public class GraphTest {
     @Test
     public void createUndirectedMGraph() throws Exception {
-        MGraph mg = Graph.createUndirectedMGraph();
+        MGraph mg = Graph.createUndirectedMGraph(false);
         System.out.println(mg);
     }
 
     @Test
     public void createDirectedMGraph() throws Exception {
-        MGraph mg = Graph.createDirectedMGraph();
+        MGraph mg = Graph.createDirectedMGraph(false);
         System.out.println(mg);
     }
 
